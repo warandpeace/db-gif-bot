@@ -1,3 +1,9 @@
+# DB Gif Bot
+
+This is a Desert Bus Gifbot for Twitter that's (obviously) heavily forked from Erin Mckean's fantastic blank lamba bot template. So yes I "made" the bit that goes on top but the heavy lifting is all Erin, so I'm including her original README below because I don't know what's appropriate to do here. Shrug emoji!
+
+----
+
 #Blank AWS Lambda Bot
 
 ##Instructions
