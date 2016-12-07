@@ -55,23 +55,23 @@ function pickTweet(){
 
 exports.handler = function myBot(event, context) {
   var textToTweet = pickTweet();
-  
-	download('http://hats.retrosnub.uk/DesertBus9/db9_andrew_pose.gif', 'db9_andrew_pose.gif', tweetdatgif)
+
+	download('http://hats.retrosnub.uk/DesertBus9/db9_andrew_pose.gif', '/tmp/db9_andrew_pose.gif', tweetdatgif);
 
   function tweetdatgif(){
-    var b64content = fs.readFileSync('db9_andrew_pose.gif', { encoding: 'base64' })
+    var b64content = fs.readFileSync('/tmp/db9_andrew_pose.gif', { encoding: 'base64' });
     // first we must post the media to Twitter
     T.post('media/upload', { media_data: b64content }, function (err, data, response) {
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
-      var mediaIdStr = data.media_id_string
-      var altText = textToTweet
-      var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } }
+      var mediaIdStr = data.media_id_string;
+      var altText = textToTweet;
+      var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } };
 
       T.post('media/metadata/create', meta_params, function (err, data, response) {
         if (!err) {
           // now we can reference the media and post a tweet (media will attach to the tweet)
-          var params = { status: textToTweet, media_ids: [mediaIdStr] }
+          var params = { status: textToTweet, media_ids: [mediaIdStr] };
 
           T.post('statuses/update', params, function (err, data, response) {
             if (err) {
@@ -82,12 +82,12 @@ exports.handler = function myBot(event, context) {
               console.log('tweet:', reply);
               context.succeed();
             }
-          })
+          });
         }
         else {
-          console.log(err)
+          console.log(err);
         }
-      })
-    })
+      });
+    });
   }
 };
