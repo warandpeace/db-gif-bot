@@ -1,3 +1,5 @@
+var fs = require('fs');
+var http = require('http');
 var Twit = require('twit');
 var wordfilter = require('wordfilter');
 var T = new Twit(require('botfiles/config.js'));
