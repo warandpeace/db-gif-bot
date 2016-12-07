@@ -79,7 +79,7 @@ exports.handler = function myBot(event, context) {
               context.fail();
             }
             else {
-              console.log('tweet:', reply);
+              console.log('tweet:', response);
               context.succeed();
             }
           });
