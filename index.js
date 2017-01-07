@@ -4,6 +4,7 @@ var Twit = require('twit');
 var wordfilter = require('wordfilter');
 var T = new Twit(require('botfiles/config.js'));
 var myText = require('botfiles/sample-text.js');
+var desertBus = require('botfiles/desert-bus-list.js');
 
 //a nice 'pick' function thanks to Darius Kazemi: https://github.com/dariusk
 Array.prototype.pick = function() {
