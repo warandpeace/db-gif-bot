@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "botfiles": "/botfiles",
+    "buzzfeed-headlines": "^2.0.0",
     "clickhole-headlines": "^1.0.1",
     "twit": "^2.2.4",
     "underscore": "^1.8.3",
