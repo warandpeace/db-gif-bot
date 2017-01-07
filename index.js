@@ -62,17 +62,44 @@ function chooseBus(){
 exports.handler = function myBot(event, context) {
   var textToTweet = pickTweet();
   var busToTweet = chooseBus();
-  var gifToDownload = writeGifUrl();
+  var gifToTweet = chooseGif();
+  var gifDownloadUrl = writeGifDownloadUrl();
+  var gifLocalUrl = writeGifLocalUrl();
 
-	download(gifToDownload, '/tmp/db9_andrew_pose.gif', tweetDatGif);
+	download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
 
-function writeGifUrl(){
-  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/db9_andrew_pose.gif"
+function chooseGif(){
+  switch(busToTweet){
+    case "DesertBus5-6-7":
+      var gifList = require('botfiles/db567-gif-list.js');
+      break;
+    case "DesertBus8":
+      var gifList = require('botfiles/db8-gif-list.js');
+      break;
+    case "DesertBus9":
+      var gifList = require('botfiles/db9-gif-list.js');
+      break;
+    case "DesertBus10":
+      var gifList = require('botfiles/db10-gif-list.js');
+      break;
+    default:
+      console.log("Something fucked up.")
+  }
+  return gifList.pick()
+}
+
+function writeGifDownloadUrl(){
+  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/" + gifToTweet
+  return GifUrl
+}
+
+function writeGifLocalUrl(){
+  var GifUrl = "/tmp/" + gifToTweet
   return GifUrl
 }
 
   function tweetDatGif(){
-    var b64content = fs.readFileSync('/tmp/db9_andrew_pose.gif', { encoding: 'base64' });
+    var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
     // first we must post the media to Twitter
     T.post('media/upload', { media_data: b64content }, function (err, data, response) {
       // now we can assign alt text to the media, for use by screen readers and
