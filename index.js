@@ -54,12 +54,23 @@ function pickTweet(){
   }
 }
 
+function chooseBus(){
+  return desertBus.pick();
+}
+
+function writeGifUrl(){
+  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/db9_andrew_pose.gif"
+  return GifUrl
+}
+
 exports.handler = function myBot(event, context) {
   var textToTweet = pickTweet();
+  var busToTweet = chooseBus();
+  var gifToDownload = writeGifUrl();
 
-	download('http://hats.retrosnub.uk/DesertBus9/db9_andrew_pose.gif', '/tmp/db9_andrew_pose.gif', tweetdatgif);
+	download(gifToDownload, '/tmp/db9_andrew_pose.gif', tweetDatGif);
 
-  function tweetdatgif(){
+  function tweetDatGif(){
     var b64content = fs.readFileSync('/tmp/db9_andrew_pose.gif', { encoding: 'base64' });
     // first we must post the media to Twitter
     T.post('media/upload', { media_data: b64content }, function (err, data, response) {
