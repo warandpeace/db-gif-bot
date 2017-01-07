@@ -58,10 +58,6 @@ function chooseBus(){
   return desertBus.pick();
 }
 
-function writeGifUrl(){
-  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/db9_andrew_pose.gif"
-  return GifUrl
-}
 
 exports.handler = function myBot(event, context) {
   var textToTweet = pickTweet();
@@ -69,6 +65,11 @@ exports.handler = function myBot(event, context) {
   var gifToDownload = writeGifUrl();
 
 	download(gifToDownload, '/tmp/db9_andrew_pose.gif', tweetDatGif);
+
+function writeGifUrl(){
+  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/db9_andrew_pose.gif"
+  return GifUrl
+}
 
   function tweetDatGif(){
     var b64content = fs.readFileSync('/tmp/db9_andrew_pose.gif', { encoding: 'base64' });
