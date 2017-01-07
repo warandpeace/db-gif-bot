@@ -67,7 +67,7 @@ exports.handler = function myBot(event, context) {
 	download(gifToDownload, '/tmp/db9_andrew_pose.gif', tweetDatGif);
 
 function writeGifUrl(){
-  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/db9_andrew_pose.gif"
+  var GifUrl = "http://hats.retrosnub.uk/DesertBus9/db9_andrew_pose.gif"
   return GifUrl
 }
 
