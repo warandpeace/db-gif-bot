@@ -68,35 +68,35 @@ exports.handler = function myBot(event, context) {
 
 	download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
 
-function chooseGif(){
-  switch(busToTweet){
-    case "DesertBus5-6-7":
-      var gifList = require('botfiles/db567-gif-list.js');
-      break;
-    case "DesertBus8":
-      var gifList = require('botfiles/db8-gif-list.js');
-      break;
-    case "DesertBus9":
-      var gifList = require('botfiles/db9-gif-list.js');
-      break;
-    case "DesertBus10":
-      var gifList = require('botfiles/db10-gif-list.js');
-      break;
-    default:
-      console.log("Something fucked up.")
+  function chooseGif(){
+    switch(busToTweet){
+      case "DesertBus5-6-7":
+        var gifList = require('botfiles/db567-gif-list.js');
+        break;
+      case "DesertBus8":
+        var gifList = require('botfiles/db8-gif-list.js');
+        break;
+      case "DesertBus9":
+        var gifList = require('botfiles/db9-gif-list.js');
+        break;
+      case "DesertBus10":
+        var gifList = require('botfiles/db10-gif-list.js');
+        break;
+      default:
+        console.log("Something fucked up.")
+    }
+    return gifList.pick()
   }
-  return gifList.pick()
-}
 
-function writeGifDownloadUrl(){
-  var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/" + gifToTweet
-  return GifUrl
-}
+  function writeGifDownloadUrl(){
+    var GifUrl = "http://hats.retrosnub.uk/" + busToTweet + "/" + gifToTweet
+    return GifUrl
+  }
 
-function writeGifLocalUrl(){
-  var GifUrl = "/tmp/" + gifToTweet
-  return GifUrl
-}
+  function writeGifLocalUrl(){
+    var GifUrl = "/tmp/" + gifToTweet
+    return GifUrl
+  }
 
   function tweetDatGif(){
     var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
@@ -130,4 +130,4 @@ function writeGifLocalUrl(){
       });
     });
   }
-};
+}
