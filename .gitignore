@@ -9,3 +9,6 @@ node_modules/*
 #Gulp dist files
 dist/*
 dist.zip
+
+#Local test files
+test.js
