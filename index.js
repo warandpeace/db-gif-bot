@@ -4,9 +4,10 @@ var Twit = require('twit');
 var wordfilter = require('wordfilter');
 
 var T = new Twit(require('botfiles/config.js'));
-var myText = require('botfiles/sample-text.js');
+var sources = ["buzzfeed","clickhole"];
 var desertBus = require('botfiles/desert-bus-list.js');
 var buzzfeed = require('buzzfeed-headlines');
+var clickhole = require('clickhole-headlines');
 
 //a nice 'pick' function thanks to Darius Kazemi: https://github.com/dariusk
 Array.prototype.pick = function() {
@@ -60,18 +61,38 @@ function chooseBus(){
   return desertBus.pick();
 }
 
+function chooseSource(){
+  return sources.pick();
+}
 
 exports.handler = function myBot(event, context) {
   var textToTweet = ""
   var busToTweet = chooseBus();
   var gifToTweet = chooseGif();
+  var sourceToTweet = chooseSource();
   var gifDownloadUrl = writeGifDownloadUrl();
   var gifLocalUrl = writeGifLocalUrl();
 
-  buzzfeed(function(err, headlines){
-    textToTweet = pickTweet(headlines);
-    download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-  });
+  iDontUnderstandCallbacks();
+
+  function iDontUnderstandCallbacks(){
+    switch(sourceToTweet){
+      case "buzzfeed":
+        buzzfeed(function(err, headlines){
+          textToTweet = pickTweet(headlines);
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+        });
+        break;
+      case "clickhole":
+        clickhole(function(err, headlines){
+          textToTweet = pickTweet(headlines);
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+        });
+        break;
+      default:
+        console.log("Something fucked up in a different place.")
+    }
+  }
 
   function chooseGif(){
     switch(busToTweet){
