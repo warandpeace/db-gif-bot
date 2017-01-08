@@ -2,9 +2,11 @@ var fs = require('fs');
 var http = require('http');
 var Twit = require('twit');
 var wordfilter = require('wordfilter');
+
 var T = new Twit(require('botfiles/config.js'));
 var myText = require('botfiles/sample-text.js');
 var desertBus = require('botfiles/desert-bus-list.js');
+var buzzfeed = require('buzzfeed-headlines');
 
 //a nice 'pick' function thanks to Darius Kazemi: https://github.com/dariusk
 Array.prototype.pick = function() {
@@ -44,8 +46,8 @@ function tweetLengthOK(phrase) {
   }
 }
 
-function pickTweet(){
-  var tweetText = myText.pick();
+function pickTweet(buzzfeedHeadlines){
+  var tweetText = buzzfeedHeadlines.pick();
   if (tweetOK(tweetText)) {
     return tweetText;
   }
@@ -60,13 +62,16 @@ function chooseBus(){
 
 
 exports.handler = function myBot(event, context) {
-  var textToTweet = pickTweet();
+  var textToTweet = ""
   var busToTweet = chooseBus();
   var gifToTweet = chooseGif();
   var gifDownloadUrl = writeGifDownloadUrl();
   var gifLocalUrl = writeGifLocalUrl();
 
-	download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+  buzzfeed(function(err, headlines){
+    textToTweet = pickTweet(headlines);
+    download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+  });
 
   function chooseGif(){
     switch(busToTweet){
