@@ -144,11 +144,12 @@ exports.handler = function myBot(event, context) {
 
   function tweetDatGif(){
     console.log("function tweetDatGif")
-    var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
+    // var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
     console.log("read the file woo")
     // first we must post the media to Twitter
-    T.post('media/upload', { media_data: b64content }, function (err, data, response) {
+    T.postMediaChunked({ file_path: gifLocalUrl }, function (err, data, response) {
       console.log("function MEDIA UPLOAD WHOOP WHOOP")
+      console.log(data)
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
       var mediaIdStr = data.media_id_string;
