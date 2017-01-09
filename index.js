@@ -88,28 +88,31 @@ exports.handler = function myBot(event, context) {
 
   function iDontUnderstandCallbacks(){
     console.log("function iDontUnderstandCallbacks")
-    textToTweet = "test string"
     download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-    // switch(sourceToTweet){
-    //   case "buzzfeed":
-    //     console.log("chose buzzfeed")
-    //     buzzfeed(function(err, headlines){
-    //       console.log("function buzzfeed")
-    //       textToTweet = pickTweet(headlines);
-    //       download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-    //     });
-    //     break;
-    //   case "clickhole":
-    //     console.log("chose clickhole")
-    //     clickhole(function(err, headlines){
-    //       console.log("function clickhole")
-    //       textToTweet = pickTweet(headlines);
-    //       download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-    //     });
-    //     break;
-    //   default:
-    //     console.log("Something fucked up in a different place.")
-    // }
+    switch(sourceToTweet){
+      case "buzzfeed":
+        console.log("chose buzzfeed")
+        buzzfeed(function(err, headlines){
+          console.log("function buzzfeed")
+          console.log(headlines)
+          textToTweet = pickTweet(headlines);
+          console.log("chosen headline: " + textToTweet)
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+        });
+        break;
+      case "clickhole":
+        console.log("chose clickhole")
+        clickhole(function(err, headlines){
+          console.log("function clickhole")
+          console.log(headlines)
+          textToTweet = pickTweet(headlines);
+          console.log("chosen headline: " + textToTweet)
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+        });
+        break;
+      default:
+        console.log("Something fucked up in a different place.")
+    }
   }
 
   function chooseGif(){
