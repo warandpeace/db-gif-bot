@@ -16,13 +16,20 @@ Array.prototype.pick = function() {
 
 //a nice 'download' function thanks to Vince Yuan: http://stackoverflow.com/users/1028103/vince-yuan
 var download = function(url, dest, cb) {
+  console.log("entering download function")
+  console.log(url)
+  console.log(dest)
+  console.log(cb)
   var file = fs.createWriteStream(dest);
   var request = http.get(url, function(response) {
+    console.log("inside http.get function")
     response.pipe(file);
     file.on('finish', function() {
+      console.log("inside file.on finish function")
       file.close(cb);  // close() is async, call cb after close completes.
     });
   }).on('error', function(err) { // Handle errors
+    console.log("inside file.on error function")
     fs.unlink(dest); // Delete the file async. (But we don't check the result)
     if (cb) cb(err.message);
   });
