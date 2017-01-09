@@ -30,6 +30,7 @@ var download = function(url, dest, cb) {
 
 //functions 
 function tweetOK(phrase) {
+  console.log("function tweetOK")
   if (!wordfilter.blacklisted(phrase) && phrase !== undefined && phrase !== "" && tweetLengthOK(phrase)){
     return true;
   }
@@ -39,6 +40,7 @@ function tweetOK(phrase) {
 }
 
 function tweetLengthOK(phrase) {
+  console.log("function tweetLengthOK")
   if (phrase.length <= 130){
     return true;
   }
@@ -48,6 +50,7 @@ function tweetLengthOK(phrase) {
 }
 
 function pickTweet(buzzfeedHeadlines){
+  console.log("function pickTweet")
   var tweetText = buzzfeedHeadlines.pick();
   if (tweetOK(tweetText)) {
     return tweetText;
@@ -66,6 +69,7 @@ function chooseSource(){
 }
 
 exports.handler = function myBot(event, context) {
+  console.log("ENTERING MAIN EXPORT HANDLER HOLY SHIT")
   var textToTweet = ""
   var busToTweet = chooseBus();
   var gifToTweet = chooseGif();
@@ -76,22 +80,29 @@ exports.handler = function myBot(event, context) {
   iDontUnderstandCallbacks();
 
   function iDontUnderstandCallbacks(){
-    switch(sourceToTweet){
-      case "buzzfeed":
-        buzzfeed(function(err, headlines){
-          textToTweet = pickTweet(headlines);
-          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-        });
-        break;
-      case "clickhole":
-        clickhole(function(err, headlines){
-          textToTweet = pickTweet(headlines);
-          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-        });
-        break;
-      default:
-        console.log("Something fucked up in a different place.")
-    }
+    console.log("function iDontUnderstandCallbacks")
+    textToTweet = "test string"
+    download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+    // switch(sourceToTweet){
+    //   case "buzzfeed":
+    //     console.log("chose buzzfeed")
+    //     buzzfeed(function(err, headlines){
+    //       console.log("function buzzfeed")
+    //       textToTweet = pickTweet(headlines);
+    //       download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+    //     });
+    //     break;
+    //   case "clickhole":
+    //     console.log("chose clickhole")
+    //     clickhole(function(err, headlines){
+    //       console.log("function clickhole")
+    //       textToTweet = pickTweet(headlines);
+    //       download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+    //     });
+    //     break;
+    //   default:
+    //     console.log("Something fucked up in a different place.")
+    // }
   }
 
   function chooseGif(){
@@ -125,9 +136,12 @@ exports.handler = function myBot(event, context) {
   }
 
   function tweetDatGif(){
+    console.log("function tweetDatGif")
     var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
+    console.log("read the file woo")
     // first we must post the media to Twitter
     T.post('media/upload', { media_data: b64content }, function (err, data, response) {
+      console.log("function MEDIA UPLOAD WHOOP WHOOP")
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
       var mediaIdStr = data.media_id_string;
@@ -135,11 +149,13 @@ exports.handler = function myBot(event, context) {
       var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } };
 
       T.post('media/metadata/create', meta_params, function (err, data, response) {
+        console.log("function TWEET CREATE METADATA")
         if (!err) {
           // now we can reference the media and post a tweet (media will attach to the tweet)
           var params = { status: textToTweet, media_ids: [mediaIdStr] };
 
           T.post('statuses/update', params, function (err, data, response) {
+            console.log("function MAKIN DA TWEET")
             if (err) {
               console.log('error:', err);
               context.fail();
