@@ -153,6 +153,14 @@ exports.handler = function myBot(event, context) {
     T.postMediaChunked({ file_path: gifLocalUrl }, function (err, data, response) {
       console.log("function MEDIA UPLOAD WHOOP WHOOP")
       console.log(data)
+      if (err) {
+        console.log('error:', err);
+        context.fail();
+      }
+      else {
+        console.log('response:', response);
+        context.succeed();
+      }
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
       var mediaIdStr = data.media_id_string;
