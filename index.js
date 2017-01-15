@@ -88,7 +88,7 @@ exports.handler = function myBot(event, context) {
 
   function iDontUnderstandCallbacks(){
     console.log("function iDontUnderstandCallbacks")
-    download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+    // download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
     switch(sourceToTweet){
       case "buzzfeed":
         console.log("chose buzzfeed")
