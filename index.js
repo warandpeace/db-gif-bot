@@ -148,11 +148,9 @@ exports.handler = function myBot(event, context) {
   function tweetDatGif(){
     console.log("function tweetDatGif")
     // var b64content = fs.readFileSync(gifLocalUrl, { encoding: 'base64' });
-    console.log("read the file woo")
     // first we must post the media to Twitter
     T.postMediaChunked({ file_path: gifLocalUrl }, function (err, data, response) {
       console.log("function MEDIA UPLOAD WHOOP WHOOP")
-      console.log(data)
       if (err) {
         console.log('error:', err);
         context.fail();
