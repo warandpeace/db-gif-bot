@@ -115,12 +115,12 @@ exports.handler = function myBot(event, context) {
     }
   }
 
-  function shitWorked(){
-    console.log("It actually worked")
-    console.log(textToTweet)
-    console.log(gifLocalUrl)
-    context.succeed();
-  }
+  // function shitWorked(){
+  //   console.log("It actually worked")
+  //   console.log(textToTweet)
+  //   console.log(gifLocalUrl)
+  //   context.succeed();
+  // }
 
   function chooseGif(){
     switch(busToTweet){
