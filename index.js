@@ -4,7 +4,7 @@ var Twit = require('twit');
 var wordfilter = require('wordfilter');
 
 var T = new Twit(require('botfiles/config.js'));
-var sources = ["buzzfeed","clickhole"];
+var sources = ["buzzfeed","buzzfeed"];
 var desertBus = require('botfiles/desert-bus-list.js');
 var buzzfeed = require('buzzfeed-headlines');
 var clickhole = require('clickhole-headlines');
@@ -97,7 +97,7 @@ exports.handler = function myBot(event, context) {
           console.log(headlines)
           textToTweet = pickTweet(headlines);
           console.log("chosen headline: " + textToTweet)
-          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
+          download(gifDownloadUrl, gifLocalUrl, shitWorked);
         });
         break;
       case "clickhole":
@@ -107,12 +107,18 @@ exports.handler = function myBot(event, context) {
           console.log(headlines)
           textToTweet = pickTweet(headlines);
           console.log("chosen headline: " + textToTweet)
-          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
-        });
+          download(gifDownloadUrl, gifLocalUrl, shitWorked);
+        }, 1);
         break;
       default:
         console.log("Something fucked up in a different place.")
     }
+  }
+
+  function shitWorked(){
+    console.log("It actually worked")
+    console.log(textToTweet)
+    console.log(gifLocalUrl)
   }
 
   function chooseGif(){
