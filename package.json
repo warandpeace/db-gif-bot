@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "botfiles": "/botfiles",
-    "buzzfeed-headlines": "^2.0.0",
+    "buzzfeed-headlines": "warandpeace/buzzfeed-headlines",
     "clickhole-headlines": "warandpeace/clickhole-headlines",
     "twit": "^2.2.4",
     "underscore": "^1.8.3",
