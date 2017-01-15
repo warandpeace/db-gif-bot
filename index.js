@@ -4,7 +4,7 @@ var Twit = require('twit');
 var wordfilter = require('wordfilter');
 
 var T = new Twit(require('botfiles/config.js'));
-var sources = ["buzzfeed","buzzfeed"];
+var sources = ["buzzfeed","clickhole"];
 var desertBus = require('botfiles/desert-bus-list.js');
 var buzzfeed = require('buzzfeed-headlines');
 var clickhole = require('clickhole-headlines');
@@ -97,7 +97,7 @@ exports.handler = function myBot(event, context) {
           console.log(headlines)
           textToTweet = pickTweet(headlines);
           console.log("chosen headline: " + textToTweet)
-          download(gifDownloadUrl, gifLocalUrl, shitWorked);
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
         });
         break;
       case "clickhole":
@@ -107,7 +107,7 @@ exports.handler = function myBot(event, context) {
           console.log(headlines)
           textToTweet = pickTweet(headlines);
           console.log("chosen headline: " + textToTweet)
-          download(gifDownloadUrl, gifLocalUrl, shitWorked);
+          download(gifDownloadUrl, gifLocalUrl, tweetDatGif);
         }, 1);
         break;
       default:
@@ -119,6 +119,7 @@ exports.handler = function myBot(event, context) {
     console.log("It actually worked")
     console.log(textToTweet)
     console.log(gifLocalUrl)
+    context.succeed();
   }
 
   function chooseGif(){
