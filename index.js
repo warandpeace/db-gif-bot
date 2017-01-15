@@ -157,7 +157,6 @@ exports.handler = function myBot(event, context) {
       }
       else {
         console.log('response:', response);
-        context.succeed();
       }
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
