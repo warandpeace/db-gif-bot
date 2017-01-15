@@ -56,14 +56,14 @@ function tweetLengthOK(phrase) {
   }
 }
 
-function pickTweet(buzzfeedHeadlines){
+function pickTweet(externalHeadlines){
   console.log("function pickTweet")
-  var tweetText = buzzfeedHeadlines.pick();
+  var tweetText = externalHeadlines.pick();
   if (tweetOK(tweetText)) {
     return tweetText;
   }
   else {
-    tweetText = pickTweet();
+    tweetText = pickTweet(externalHeadlines);
   }
 }
 
