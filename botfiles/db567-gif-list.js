@@ -696,7 +696,6 @@ module.exports = [
 "maya_disappointed-singing.gif",
 "maya_exercise-bike.gif",
 "maya_extra-cute-sunkern.gif",
-"maya_intensifies.gif",
 "maya_multiple-arms-dancing.gif",
 "maya_reaction-to-broken-lobster.gif",
 "maya_recreation-fist-pumping.gif",
