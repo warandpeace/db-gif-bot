@@ -31,7 +31,7 @@
   "dependencies": {
     "botfiles": "/botfiles",
     "buzzfeed-headlines": "warandpeace/buzzfeed-headlines",
-    "clickhole-headlines": "warandpeace/clickhole-headlines",
+    "clickhole-headlines": "warandpeace/clickhole-headlines#copy_buzzfeed",
     "twit": "^2.2.4",
     "underscore": "^1.8.3",
     "wordfilter": "^0.2.6"
