@@ -1,7 +1,7 @@
 {
   "name": "db-gif-bot",
   "version": "1.1.0",
-  "description": "A Twitter bot for Desert Bus gifs based on emckean's blank-lambda-bot template",
+  "description": "A Twitter bot that pairs Desert Bus GIFs with funny headlines. Based on emckean's blank-lambda-bot template",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -10,7 +10,8 @@
     "aws",
     "lambda",
     "bot",
-    "template"
+    "twitter",
+    "silly"
   ],
   "author": "Andrew Ferguson",
   "license": "ISC",
