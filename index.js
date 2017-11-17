@@ -3,7 +3,7 @@ var http = require('http');
 var Twit = require('twit');
 var wordfilter = require('wordfilter');
 
-# Add a few extra words to the filter
+// Add a few extra words to the filter
 wordfilter.addWords(['9/11','blackface', 'Vegas', 'trump', 'rifle', 'pistol', 'shotgun']);
 
 var T = new Twit(require('botfiles/config.js'));
