@@ -139,6 +139,9 @@ exports.handler = function myBot(event, context) {
       case "DesertBus10":
         var gifList = require('botfiles/db10-gif-list.js');
         break;
+      case "DesertBus2017":
+        var gifList = require('botfiles/db2017-gif-list.js');
+        break;
       default:
         console.log("Something fucked up.")
     }

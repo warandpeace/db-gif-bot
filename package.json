@@ -30,7 +30,7 @@
     "run-sequence": "^1.2.1"
   },
   "dependencies": {
-    "botfiles": "/botfiles",
+    "botfiles": "^1.0.1",
     "buzzfeed-headlines": "warandpeace/buzzfeed-headlines",
     "clickhole-headlines": "warandpeace/clickhole-headlines#copy_buzzfeed",
     "twit": "^2.2.4",
